@@ -23,7 +23,8 @@
     NSString *alertBody         =  [command.arguments objectAtIndex:1];
     NSNumber *repeatInterval    =  [command.arguments objectAtIndex:2];
     NSString *soundName         =  [command.arguments objectAtIndex:3];
-    NSString *notificationId    =  [command.arguments objectAtIndex:4];
+    //NSString *notificationId    =  [command.arguments objectAtIndex:4];
+    NSString *notificationId =[NSString stringWithFormat:@"%@",[command.arguments objectAtIndex:4]];
     
     notif.alertBody         = ([alertBody isEqualToString:@""])?nil:alertBody;
     notif.fireDate          = [NSDate dateWithTimeIntervalSince1970:fireDate];
@@ -46,7 +47,10 @@
 
 - (void)cancelNotification:(CDVInvokedUrlCommand*)command {
     
-    NSString *notificationId    = [command.arguments objectAtIndex:0];
+    //NSString *notificationId    = [command.arguments objectAtIndex:0];
+    //parameter pass from javascript ,maybe not string , cause [notificationId isEqualToString:notId] compare fail
+    NSString *notificationId = [NSString stringWithFormat:@"%@",[command argumentAtIndex:0]];
+    
 	NSArray *notifications      = [[UIApplication sharedApplication] scheduledLocalNotifications];
     
 	for (UILocalNotification *notification in notifications) {
